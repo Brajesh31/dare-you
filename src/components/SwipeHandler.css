@@ -1,0 +1,114 @@
+.swipe-container {
+  touch-action: pan-y;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.swipe-container.dragging {
+  cursor: grabbing;
+}
+
+.swipe-container:not(.dragging) {
+  cursor: grab;
+}
+
+.swipe-hint {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.swipe-hint-left {
+  left: 20px;
+}
+
+.swipe-hint-right {
+  right: 20px;
+}
+
+.swipe-hint-arrow {
+  width: 12px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+}
+
+.swipe-hint-left .swipe-hint-arrow {
+  transform: rotate(135deg);
+}
+
+.swipe-hint-right .swipe-hint-arrow {
+  transform: rotate(-45deg);
+}
+
+.swipe-instructions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px 15px;
+  opacity: 0.7;
+  font-size: 0.9rem;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.swipe-instruction-text {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  padding: 5px 12px;
+  backdrop-filter: blur(2px);
+}
+
+/* Show swipe hints initially and fade them over time */
+.swipe-container-new .swipe-hint {
+  opacity: 0.8;
+  animation: fadeOut 3s ease 2s forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 0.8; }
+  to { opacity: 0; }
+}
+
+/* Show swipe hints for active swiping */
+.swiping-left .swipe-hint-left {
+  opacity: 0.9;
+}
+
+.swiping-right .swipe-hint-right {
+  opacity: 0.9;
+}
+
+/* Add some visual feedback while dragging */
+.dragging .card {
+  transition: transform 0.2s ease !important;
+}
+
+.swiping-left .card {
+  transform: rotate(-2deg) translateX(-10px) !important;
+}
+
+.swiping-right .card {
+  transform: rotate(2deg) translateX(10px) !important;
+} 
